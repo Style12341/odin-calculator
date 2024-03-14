@@ -16,6 +16,7 @@ html, body{
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    background-color: #5a5a5a;
 }
 #header{
     background-color: #4d4dff;

@@ -24,6 +24,17 @@ class Display {
   addResult(value) {
     this.result.textContent += value;
   }
+  removeDigit() {
+    if (this.result.textContent.length > 1) {
+      this.result.textContent = this.result.textContent.slice(0, this.result.textContent.length - 1);
+      this.firstNumber = this.firstNumber.slice(0, this.firstNumber.length - 1);
+      this.history.textContent = this.history.textContent.slice(0, this.history.textContent.length - 1);
+    } else if (this.result.textContent.length == 1) {
+      this.history.textContent = this.history.textContent.slice(0, this.history.textContent.length - 1);
+      this.result.textContent = "0";
+      this.firstNumber = "";
+    }
+  }
   addHistory(value) {
     if ((this.history.textContent + value).length > 60) {
       this.history.textContent =
@@ -177,6 +188,11 @@ allButtons.forEach((button) => {
     case "-":
       button.addEventListener("click", (e) => {
         display.addOperation("-");
+      });
+      break;
+    case "backspace":
+      button.addEventListener("click", (e) => {
+        display.removeDigit();
       });
       break;
     default:
