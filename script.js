@@ -6,7 +6,7 @@ var scale = screen.width / siteWidth;
 
 document
   .querySelector('meta[name="viewport"]')
-  .setAttribute("content", "width=" + siteWidth + ", initial-scale=" + scale + "");
+  .setAttribute("content", "width=" + siteWidth + ", initial-scale=" + Math.min(1.3, scale) + "");
 class Display {
   constructor() {
     this.result = displayResult;
