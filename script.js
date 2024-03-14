@@ -1,7 +1,12 @@
 let allButtons = document.querySelectorAll("button");
 let displayResult = document.querySelector(".result");
 let displayHistory = document.querySelector(".history");
+var siteWidth = 1280;
+var scale = screen.width / siteWidth;
 
+document
+  .querySelector('meta[name="viewport"]')
+  .setAttribute("content", "width=" + siteWidth + ", initial-scale=" + scale + "");
 class Display {
   constructor() {
     this.result = displayResult;
