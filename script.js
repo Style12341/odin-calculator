@@ -158,8 +158,10 @@ allButtons.forEach((button) => {
       break;
     case "=":
       button.addEventListener("click", (e) => {
-        display.operate(display.pendingOperation, parseFloat(display.firstNumber), parseFloat(display.secondNumber));
-        display.addHistory("=");
+        if (display.history.textContent.slice(-1) !== "=") {
+          display.operate(display.pendingOperation, parseFloat(display.firstNumber), parseFloat(display.secondNumber));
+          display.addHistory("=");
+        }
       });
       break;
     case "+":
