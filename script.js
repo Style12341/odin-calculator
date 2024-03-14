@@ -25,6 +25,8 @@ class Display {
     this.result.textContent += value;
   }
   removeDigit() {
+    let lastChar = this.history.textContent.slice(-1);
+    if (lastChar === "=" || lastChar === "*" || lastChar === "/" || lastChar === "+" || lastChar === "-") return;
     if (this.result.textContent.length > 1) {
       this.result.textContent = this.result.textContent.slice(0, this.result.textContent.length - 1);
       this.firstNumber = this.firstNumber.slice(0, this.firstNumber.length - 1);
@@ -200,5 +202,34 @@ allButtons.forEach((button) => {
         display.addNumber(e.target.value);
       });
       break;
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace") {
+    display.removeDigit();
+  } else if (e.key === "Delete") {
+    display.clearCalculator();
+  } else if (e.key === "Enter") {
+    if (display.history.textContent.slice(-1) !== "=") {
+      display.operate(display.pendingOperation, parseFloat(display.firstNumber), parseFloat(display.secondNumber));
+      display.addHistory("=");
+    }
+  } else if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
+    display.addOperation(e.key);
+  } else if (e.key === "Escape") {
+    display.clearCalculator();
+  } else if (
+    e.key === "0" ||
+    e.key === "1" ||
+    e.key === "2" ||
+    e.key === "3" ||
+    e.key === "4" ||
+    e.key === "5" ||
+    e.key === "6" ||
+    e.key === "7" ||
+    e.key === "8" ||
+    e.key === "9"
+  ) {
+    display.addNumber(e.key);
   }
 });
